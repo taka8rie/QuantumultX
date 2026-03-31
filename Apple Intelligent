@@ -1,0 +1,9 @@
+# Apple Intelligence 
+host-suffix, apple-relay.apple.com,auto
+host-suffix, apple-relay.fastly-edge.com,auto
+host-suffix, apple-relay.cloudflare.com,auto
+host-suffix, gateway.icloud.com,auto
+host-suffix, guzzoni.apple.com,auto
+host-suffix, cp4.cloudflare.com,auto
+host-suffix, gspe1-ssl.ls.apple.com,auto
+host-suffix, apps.mzstatic.com,auto
