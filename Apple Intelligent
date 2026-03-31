@@ -1,4 +1,23 @@
-# Apple Intelligence 
+# OpenAI ChatGPT
+host-keyword, chatgpt-async-webps-prod-,auto
+host-suffix, webpubsub.azure.com,auto
+host-keyword, openaicom-api-,auto
+host-suffix, azurefd.net,auto
+host, chatgpt.livekit.cloud,auto
+host, host.livekit.cloud,auto
+host-suffix, turn.livekit.cloud,auto
+host, openai.com.cdn.cloudflare.net,auto
+host, openaiapi-site.azureedge.net,auto
+host, openaicomproductionae4b.blob.core.windows.net,auto
+host, production-openaicom-storage.azureedge.net,auto
+host-suffix, chat.com,auto
+host-suffix, chatgpt.com,auto
+host-suffix, oaistatic.com,auto
+host-suffix, oaiusercontent.com,auto
+host-suffix, openai.com,auto
+host-suffix, sora.com,auto
+
+# Apple Intelligence
 host-suffix, apple-relay.apple.com,auto
 host-suffix, apple-relay.fastly-edge.com,auto
 host-suffix, apple-relay.cloudflare.com,auto
@@ -7,3 +26,61 @@ host-suffix, guzzoni.apple.com,auto
 host-suffix, cp4.cloudflare.com,auto
 host-suffix, gspe1-ssl.ls.apple.com,auto
 host-suffix, apps.mzstatic.com,auto
+
+# GitHub Copilot
+host, api.githubcopilot.com,auto
+host, copilot-proxy.githubusercontent.com,auto
+host, copilot.microsoft.com,auto
+host, sydney.bing.com,auto
+host-suffix, githubcopilot.com,auto
+
+# Google Gemini
+host, ai.google.dev,auto
+host, aida.googleapis.com,auto
+host, aistudio.google.com,auto
+host, alkalicore-pa.clients6.google.com,auto
+host, alkalimakersuite-pa.clients6.google.com,auto
+host, bard.google.com,auto
+host, deepmind.com,auto
+host, deepmind.google,auto
+host, geller-pa.googleapis.com,auto
+host, gemini.google.com,auto
+host, generativeai.google,auto
+host, generativelanguage.googleapis.com,auto
+host, makersuite.google.com,auto
+host, proactivebackend-pa.googleapis.com,auto
+
+# Anthropic Claude
+host-suffix, anthropic.com,auto
+host-suffix, claude.ai,auto
+host-suffix, claudeusercontent.com,auto
+ip-cidr, 160.79.104.0/23, auto, no-resolve
+ip6-cidr, 2607:6bc0::/48, auto, no-resolve
+
+# JetBrains AI
+host-suffix, grazie.ai,auto
+host-suffix, grazie.aws.intellij.net,auto
+host-suffix, jetbrains.ai,auto
+
+# Meta AI
+host, imagine.meta.com,auto
+host-suffix, meta.ai,auto
+
+# Perplexity AI
+host-suffix, pplx.ai,auto
+host-suffix, perplexity.ai,auto
+host-suffix, perplexity.com,auto
+
+# Mistral AI
+host, chat.mistral.ai,auto
+host, console.mistral.ai,auto
+host-suffix, mistral.ai,auto
+
+# Grok AI
+host, api.x.ai,auto
+host-suffix, x.ai,auto
+host-suffix, grok.com,auto
+
+# Trae AI
+#host, trae-api-sg.mchost.guru,auto
+#host-suffix, trae.ai,auto
