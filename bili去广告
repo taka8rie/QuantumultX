@@ -70,4 +70,4 @@ hostname = -broadcast.chat.bilibili.com, -cm.bilibili.com, -*cdn*.biliapi.net, -
 # ～ BiliBili_哔哩哔哩_动态综合页及视频页去广告@BiliUniverse
 ^https?:\/\/(grpc|app)\.bili(bili\.com|api\.net)\/bilibili\.app\.dynamic\.v2\.Dynamic\/Dyn(All|Video)$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
 # ～ BiliBili_哔哩哔哩_观看记录去广告@BiliUniverse
-^https?:\/\/(grpc|app)\.bili(bili\.com|api\.net)\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
+#^https?:\/\/(grpc|app)\.bili(bili\.com|api\.net)\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
