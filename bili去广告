@@ -1,34 +1,35 @@
 # ============================================================
 # Bilibili AdBlock for Quantumult X
-# QX 专用精简版
+# QX Hybrid Edition
 #
-# 设计原则：
-# 1. 保留 HTTP/JSON 类 Rewrite
-# 2. 不处理 grpc.biliapi.net / BiliProto / protobuf
-# 3. 缩小 MITM hostname 范围
-# 4. 删除重复规则
-# 5. 尽量保持原有脚本来源不变，方便排查效果
+# 说明：
+# 1. JSON / HTTP API Rewrite 正常启用
+# 2. gRPC URL Reject 已在 Quantumult X 实测可用
+# 3. protobuf response-body Rewrite 保留作为实验功能
+# 4. MITM hostname 尽量收窄，避免整个 Bilibili 域名被解密
+#
+# 2026-09-25
 # ============================================================
 
 
-# =========================
+# ============================================================
 # MITM Hostname
-# =========================
+# ============================================================
 
-hostname = api.bilibili.com, api.biliapi.net, api.live.bilibili.com, api.vc.bilibili.com, app.bilibili.com, app.biliapi.net
+hostname = api.bilibili.com, api.biliapi.net, api.live.bilibili.com, api.vc.bilibili.com, app.bilibili.com, app.biliapi.net, grpc.biliapi.net
 
 
 # ============================================================
-# 播放页
+# 1. 播放页 / 番剧 JSON
 # ============================================================
 
-# 屏蔽播放页广告浮窗
+# 播放页广告浮窗
 ^https?:\/\/api\.bilibili\.com\/pgc\/activity\/deliver\/material\/receive url reject-dict
 
-# 屏蔽 VIP Material 广告上报
+# VIP Material 广告上报
 ^https?:\/\/api\.bilibili\.com\/x\/vip\/ads\/material\/report url reject-dict
 
-# 屏蔽番剧播放页小卡片广告
+# 番剧播放页小卡片广告
 ^https?:\/\/api\.bilibili\.com\/pgc\/season\/player\/cards url reject-dict
 
 # 视频播放页下方商品推广
@@ -39,18 +40,18 @@ hostname = api.bilibili.com, api.biliapi.net, api.live.bilibili.com, api.vc.bili
 
 
 # ============================================================
-# 直播间
+# 2. 直播间
 # ============================================================
 
 # 直播间商品广告浮窗
 ^https?:\/\/api\.live\.bilibili\.com\/xlive\/e-commerce-interface\/v\d+\/ecommerce-user\/get_shopping_info\? url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
-# 直播间广告处理
+# 直播间广告
 ^https?:\/\/api\.live\.bilibili\.com\/xlive\/app-room\/v1\/index\/getInfoByRoom url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
 
 # ============================================================
-# 开屏 / Feed / Search Square
+# 3. 开屏 / 首页 Feed / Search Square
 # ============================================================
 
 # 开屏广告、首页 Feed、Story、搜索广场
@@ -58,44 +59,40 @@ hostname = api.bilibili.com, api.biliapi.net, api.live.bilibili.com, api.vc.bili
 
 
 # ============================================================
-# 高码率
-# 仅适用于部分旧版粉色 Bilibili 客户端
-# 如果出现账号信息异常，可以注释掉本条
-# ============================================================
-
-^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
-
-
-# ============================================================
-# 搜索 / 动态
-# ============================================================
-
-# 去除搜索中的“大家都在搜”
-^https?:\/\/api\.vc\.bilibili\.com\/search_svr\/v\d+\/Search\/recommend_words url reject-dict
-
-# 去除动态中的话题
-^https?:\/\/api\.vc\.bilibili\.com\/topic_svr\/v1\/topic_svr url reject-dict
-
-# 搜索默认词
-^https?:\/\/app\.bilibili\.com\/x\/v\d+\/search\/defaultwords url reject-dict
-
-
-# ============================================================
-# 首页 / Tab 页
+# 4. 首页推荐
 # ============================================================
 
 # 首页推荐去广告
 ^https?:\/\/app\.bilibili\.com\/x\/v2\/feed\/index url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
+
+# ============================================================
+# 5. 番剧 / 影视页面
+# ============================================================
+
 # 追番页面
 ^https?:\/\/api\.(bilibili\.com|biliapi\.net)\/pgc\/page\/bangumi url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
-# 影视 / 观影页面
+# 观影 / Cinema 页面
 ^https?:\/\/api\.(bilibili\.com|biliapi\.net)\/pgc\/page\/cinema\/tab\? url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
 
 # ============================================================
-# 外观
+# 6. 搜索 / 动态辅助接口
+# ============================================================
+
+# 搜索中的“大家都在搜”
+^https?:\/\/api\.vc\.bilibili\.com\/search_svr\/v\d+\/Search\/recommend_words url reject-dict
+
+# 动态中的话题
+^https?:\/\/api\.vc\.bilibili\.com\/topic_svr\/v1\/topic_svr url reject-dict
+
+# 搜索默认词 - HTTP API
+^https?:\/\/app\.bilibili\.com\/x\/v\d+\/search\/defaultwords url reject-dict
+
+
+# ============================================================
+# 7. Tab / 外观
 # ============================================================
 
 # 标签页处理
@@ -104,40 +101,95 @@ hostname = api.bilibili.com, api.biliapi.net, api.live.bilibili.com, api.vc.bili
 # 首页右上角活动
 ^https?:\/\/app\.bilibili\.com\/x\/resource\/top\/activity url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
-# 热搜发现 / 搜索广场
+# 热搜 / 搜索广场
 ^https?:\/\/app\.bilibili\.com\/x\/v2\/search\/square url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
 
 # ============================================================
-# 我的页面
-# 默认关闭
+# 8. 高码率
 #
-# 如果需要清理“我的”页面，可以尝试取消下面一行注释。
-# 若出现功能入口丢失，请重新注释。
+# 主要针对部分旧版 Bilibili 客户端
+# 如果出现账户页异常，注释掉即可
+# ============================================================
+
+^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
+
+
+# ============================================================
+# 9. gRPC URL Reject
+#
+# 已通过 Quantumult X 实测：
+# grpc.biliapi.net 的 URL 可以被 QX 匹配并 REJECT。
+# ============================================================
+
+# 搜索默认词
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.app\.interface\.v1\.Search\/DefaultWords$ url reject
+
+# 兼容 Default
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.app\.interface\.v1\.Search\/Default$ url reject
+
+
+# ============================================================
+# 10. BiliProto / gRPC / protobuf
+#
+# 【实验功能】
+#
+# QX 已确认可以：
+#   gRPC URL matching
+#   URL reject
+#
+# 下面继续测试：
+#   script-response-body
+#   protobuf binary body
+#
+# 如果出现：
+# - 页面加载异常
+# - 视频详情异常
+# - 搜索失败
+# - 动态打不开
+#
+# 优先注释本区域，不要动上面的 JSON Rewrite。
+# ============================================================
+
+
+# ------------------------------------------------------------
+# 搜索结果去广告
+# ------------------------------------------------------------
+
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
+
+
+# ------------------------------------------------------------
+# 视频详情 / UP 主推荐 / Relates Feed
+# ------------------------------------------------------------
+
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.app\.(view|viewunite)\.v1\.View\/(View|TFInfo|RelatesFeed)$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
+
+
+# ------------------------------------------------------------
+# 动态综合页 / 视频动态
+# ------------------------------------------------------------
+
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.app\.dynamic\.v2\.Dynamic\/Dyn(All|Video)$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
+
+
+# ------------------------------------------------------------
+# PlayURL
+# ------------------------------------------------------------
+
+^https?:\/\/grpc\.biliapi\.net\/bilibili\.app\.playurl\.v1\.PlayURL\/PlayView$ url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.protobuf.min.js
+
+
+# ============================================================
+# 11. 我的页面
+#
+# 默认关闭。
+# 如需清理“我的”页面，可以取消注释测试。
 # ============================================================
 
 # ^https?:\/\/app\.bilibili\.com\/x\/v2\/account\/mine url script-response-body https://r.sveir.xyz/Scripts/AdBlock/BiliBili/BiliBili.min.js
 
 
 # ============================================================
-# Quantumult X 不启用的 BiliProto / gRPC 规则
-# ============================================================
-#
-# 以下类型原规则依赖：
-#
-# grpc.biliapi.net
-# HTTP/2
-# protobuf / gRPC
-#
-# 例如：
-#
-# bilibili.polymer.app.search.v1.Search/SearchAll
-# bilibili.app.view.v1.View/View
-# bilibili.app.viewunite.v1.View/View
-# bilibili.app.dynamic.v2.Dynamic/DynAll
-# bilibili.app.playurl.v1.PlayURL/PlayView
-#
-# 本 QX 版本故意不加入这些 Rewrite，
-# 避免规则看似匹配但实际无法正常 MITM / 修改响应。
-#
+# END
 # ============================================================
