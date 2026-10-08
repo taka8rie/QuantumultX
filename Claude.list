@@ -1,0 +1,42 @@
+# NAME: Claude
+# DESCRIPTION: Anthropic / Claude routing rules for Quantumult X
+# HOST: 6
+# HOST-SUFFIX: 10
+# HOST-KEYWORD: 2
+# IP-CIDR: 1
+# IP6-CIDR: 1
+# IP-ASN: 1
+# TOTAL: 21
+
+# Core domains
+HOST-SUFFIX,anthropic.com,Claude
+HOST-SUFFIX,claude.ai,Claude
+HOST-SUFFIX,claude.com,Claude
+HOST-SUFFIX,clau.de,Claude
+HOST-SUFFIX,claudemcpclient.com,Claude
+HOST-SUFFIX,claudeusercontent.com,Claude
+
+# CDN and static assets
+HOST,servd-anthropic-website.b-cdn.net,Claude
+HOST,anthropic.com.cdn.cloudflare.net,Claude
+
+# Authentication and content
+HOST,anthropic.auth0.com,Claude
+HOST,anthropic-com.ghost.io,Claude
+
+# Telemetry and monitoring (third-party shared services)
+HOST-SUFFIX,sentry.io,Claude
+HOST-SUFFIX,statsigapi.net,Claude
+HOST,browser-intake-us5-datadoghq.com,Claude
+HOST-KEYWORD,datadog,Claude
+HOST-KEYWORD,sift,Claude
+
+# Customer support and widgets (third-party shared services)
+HOST-SUFFIX,intercom.io,Claude
+HOST-SUFFIX,intercomcdn.com,Claude
+HOST,cdn.usefathom.com,Claude
+
+# IP and ASN
+IP-CIDR,160.79.104.0/21,Claude,no-resolve
+IP6-CIDR,2607:6bc0::/32,Claude,no-resolve
+IP-ASN,399358,Claude
