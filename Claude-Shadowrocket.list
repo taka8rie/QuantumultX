@@ -1,0 +1,42 @@
+# NAME: Claude
+# DESCRIPTION: Claude routing rules for Shadowrocket
+# SOURCE: https://raw.githubusercontent.com/taka8rie/QuantumultX/refs/heads/main/Claude.list
+# TOTAL: 21
+# DOMAIN-SUFFIX: 10
+# DOMAIN: 6
+# DOMAIN-KEYWORD: 2
+# IP-CIDR: 2
+# IP-ASN: 1
+# Policy is selected on the RULE-SET entry in your main configuration.
+# Core domains
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,clau.de
+DOMAIN-SUFFIX,claudemcpclient.com
+DOMAIN-SUFFIX,claudeusercontent.com
+
+# CDN and static assets
+DOMAIN,servd-anthropic-website.b-cdn.net
+DOMAIN,anthropic.com.cdn.cloudflare.net
+
+# Authentication and content
+DOMAIN,anthropic.auth0.com
+DOMAIN,anthropic-com.ghost.io
+
+# Telemetry and monitoring (third-party shared services)
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,statsigapi.net
+DOMAIN,browser-intake-us5-datadoghq.com
+DOMAIN-KEYWORD,datadog
+DOMAIN-KEYWORD,sift
+
+# Customer support and widgets (third-party shared services)
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN,cdn.usefathom.com
+
+# IP and ASN
+IP-CIDR,160.79.104.0/21,no-resolve
+IP-CIDR,2607:6bc0::/32,no-resolve
+IP-ASN,399358
